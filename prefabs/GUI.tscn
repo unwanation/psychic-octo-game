@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://5v6k21848k0x"]
+
+[ext_resource type="Script" path="res://scripts/ui/GUI.gd" id="1_nusar"]
+[ext_resource type="StyleBox" uid="uid://c52rsyoami4t0" path="res://resources/styles/progress.tres" id="2_ih052"]
+[ext_resource type="StyleBox" uid="uid://dsm2a1fx407gc" path="res://resources/styles/progress_value.tres" id="3_4gv3w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uql76"]
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_p8jxl"]
+font_size = 64
+
+[node name="GUI" type="CanvasLayer"]
+process_mode = 4
+visible = false
+script = ExtResource("1_nusar")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUD" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 180.0
+offset_top = -263.0
+offset_right = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/HUD"]
+visible = false
+layout_mode = 0
+offset_left = 1084.0
+offset_top = 56.0
+offset_right = 1555.0
+offset_bottom = 118.0
+theme_override_styles/background = ExtResource("2_ih052")
+theme_override_styles/fill = ExtResource("3_4gv3w")
+max_value = 50.0
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Ammo" type="Label" parent="Control/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -342.0
+grow_horizontal = 0
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_uql76")
+horizontal_alignment = 2
+
+[node name="Clue" type="Label" parent="Control/HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1560.0
+offset_top = -263.0
+offset_right = -379.0
+offset_bottom = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_p8jxl")
+vertical_alignment = 1

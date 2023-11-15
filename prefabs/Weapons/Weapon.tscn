@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://byw6urgp0aexf"]
+
+[ext_resource type="Script" path="res://scripts/prefabs/weapons/weapon.gd" id="2_aocn7"]
+
+[node name="Weapon" type="Sprite2D"]
+offset = Vector2(84, 0)
+script = ExtResource("2_aocn7")
+
+[node name="Cooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="Reload" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

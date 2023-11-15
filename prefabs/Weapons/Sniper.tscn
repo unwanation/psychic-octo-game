@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=3 uid="uid://4hnkodynp7ja"]
+
+[ext_resource type="PackedScene" uid="uid://byw6urgp0aexf" path="res://prefabs/Weapons/Weapon.tscn" id="1_eqglo"]
+[ext_resource type="Texture2D" uid="uid://cqpstckyxih2l" path="res://assets/sprites/weapons/plasmaSniper.png" id="2_k1pn8"]
+[ext_resource type="Script" path="res://scripts/prefabs/weapons/sniper.gd" id="2_lahj7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ds08o"]
+size = Vector2(40, 8)
+
+[sub_resource type="Animation" id="Animation_mks0a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5hxyl"]
+resource_name = "shoot"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 2),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, 0), Vector2(1, 10), Vector2(30, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Charging:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(1, 1), Vector2(1, 1), Vector2(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Laser:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_elq7t"]
+_data = {
+"RESET": SubResource("Animation_mks0a"),
+"shoot": SubResource("Animation_5hxyl")
+}
+
+[node name="Sniper" instance=ExtResource("1_eqglo")]
+texture = ExtResource("2_k1pn8")
+script = ExtResource("2_lahj7")
+
+[node name="Laser" type="Area2D" parent="." index="2"]
+z_index = 2
+position = Vector2(132, 0)
+scale = Vector2(1e-05, 1)
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="Laser" type="Line2D" parent="Laser" index="0"]
+points = PackedVector2Array(0, 0, 40, 0)
+width = 8.0
+default_color = Color(0.509804, 0.00784314, 0.137255, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser" index="1"]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_ds08o")
+
+[node name="Charging" type="Line2D" parent="." index="3"]
+position = Vector2(92, 0)
+scale = Vector2(1e-05, 1)
+points = PackedVector2Array(0, 0, 40, 0)
+width = 8.0
+default_color = Color(0.509804, 0.00784314, 0.137255, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_elq7t")
+}
+
+[connection signal="body_entered" from="Laser" to="." method="_on_laser_body_entered"]

@@ -1,0 +1,56 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://d1axl15qa1hax"]
+
+[ext_resource type="Texture2D" uid="uid://xvpq0nqt7gwp" path="res://assets/sprites/characters/plankton/PlanktonIdle.png" id="1_mpgk7"]
+[ext_resource type="Texture2D" uid="uid://b3pht2hrfo3q6" path="res://assets/sprites/characters/plankton/PlanktonWalk1.png" id="2_tuta2"]
+[ext_resource type="Texture2D" uid="uid://pekuhuc6gbsi" path="res://assets/sprites/characters/plankton/PlanktonWalk2.png" id="3_omfhd"]
+[ext_resource type="Texture2D" uid="uid://ch7bbfo8k4smp" path="res://assets/sprites/characters/plankton/PlanktonWalk3.png" id="4_es6s5"]
+[ext_resource type="Texture2D" uid="uid://cdx1eynvlssa1" path="res://assets/sprites/characters/plankton/PlanktonIdleBackward.png" id="5_h50mr"]
+[ext_resource type="Texture2D" uid="uid://cwxxa5phb8u4y" path="res://assets/sprites/characters/plankton/PlanktonIdleBackwardWalk1.png" id="6_d7bbw"]
+[ext_resource type="Texture2D" uid="uid://btireochiubho" path="res://assets/sprites/characters/plankton/PlanktonIdleBackwardWalk2.png" id="7_p7601"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mpgk7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_h50mr")
+}],
+"loop": false,
+"name": &"idle_up",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tuta2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_omfhd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_es6s5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_h50mr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d7bbw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p7601")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 10.0
+}]

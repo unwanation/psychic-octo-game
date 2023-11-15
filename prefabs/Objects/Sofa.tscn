@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf077wycam4n1"]
+
+[ext_resource type="PackedScene" uid="uid://bl8cxpbjswejl" path="res://prefabs/Objects/Object.tscn" id="1_2p7bt"]
+[ext_resource type="Texture2D" uid="uid://b12ul2doksre4" path="res://assets/sprites/objects/lobby/sofa.png" id="2_or1hf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iu0fo"]
+size = Vector2(134, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbii8"]
+size = Vector2(9, 20)
+
+[node name="Sofa" instance=ExtResource("1_2p7bt")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_or1hf")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_iu0fo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(-62.5, 3)
+shape = SubResource("RectangleShape2D_kbii8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(62.5, 3)
+shape = SubResource("RectangleShape2D_kbii8")

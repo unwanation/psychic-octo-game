@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0d3qimrm73t7"]
+
+[ext_resource type="PackedScene" uid="uid://bl8cxpbjswejl" path="res://prefabs/Objects/Object.tscn" id="1_ntqvu"]
+[ext_resource type="Texture2D" uid="uid://bce86gwhks3xw" path="res://assets/sprites/objects/lobby/tv.png" id="2_dveey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bfup"]
+size = Vector2(104, 28)
+
+[node name="TV" instance=ExtResource("1_ntqvu")]
+collision_layer = 33
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_dveey")
+metadata/Interact = "start"
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_5bfup")

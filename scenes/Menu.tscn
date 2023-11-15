@@ -1,0 +1,279 @@
+[gd_scene load_steps=15 format=3 uid="uid://cjjnbpmhj114o"]
+
+[ext_resource type="Script" path="res://scripts/ui/menu.gd" id="1_tjts6"]
+[ext_resource type="Texture2D" uid="uid://b24hwytdvci7s" path="res://assets/sprites/ui/tv.png" id="2_haf5o"]
+[ext_resource type="Script" path="res://scripts/ui/glitch.gd" id="3_twu48"]
+[ext_resource type="Texture2D" uid="uid://dy8kfygm1pxak" path="res://assets/sprites/ui/glitch/settings1.png" id="4_dubdh"]
+[ext_resource type="Texture2D" uid="uid://dk5vnoubomke0" path="res://assets/sprites/ui/glitch/settings2.png" id="5_tlrka"]
+[ext_resource type="Texture2D" uid="uid://bf5gn7q7u2tsv" path="res://assets/sprites/ui/glitch/settings3.png" id="6_wllva"]
+[ext_resource type="Texture2D" uid="uid://ckb1ru2884bkj" path="res://assets/sprites/ui/buttons/button.png" id="7_3qp2u"]
+[ext_resource type="FontFile" uid="uid://ctyrtv8lxstyl" path="res://assets/fonts/font.ttf" id="8_n7cje"]
+[ext_resource type="Texture2D" uid="uid://bl64si6up3eau" path="res://assets/sprites/ui/buttons/exitbutton.png" id="9_ixpxe"]
+[ext_resource type="Texture2D" uid="uid://cpc378l4w63dc" path="res://assets/sprites/ui/buttons/exitbutton_hover.png" id="10_b0bth"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uiqju"]
+noise_type = 3
+frequency = 0.6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w4jor"]
+width = 1280
+height = 720
+seamless_blend_skirt = 0.243
+noise = SubResource("FastNoiseLite_uiqju")
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_sbnsr"]
+frames = 3
+frame_0/texture = ExtResource("4_dubdh")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("5_tlrka")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("6_wllva")
+frame_2/duration = 0.2
+
+[sub_resource type="GDScript" id="GDScript_y1h8v"]
+resource_name = "ServerPanel"
+script/source = "extends Panel
+
+
+func _ready() -> void:
+	$Host/Label.set_text(\"IP: \" + IP.get_local_addresses()[5])
+	print(IP.get_local_addresses()[5])
+
+
+func _on_host_pressed() -> void:
+	Net.init_server()
+	Root.change_scene(GLOBAL.SCENES.LOBBY)
+
+
+func _on_join_pressed() -> void:
+	if $Join/LineEdit.get_text().is_valid_ip_address():
+		Net.init_client($Join/LineEdit.get_text())
+		Root.change_scene(GLOBAL.SCENES.LOBBY)
+
+
+func _on_local_pressed() -> void:
+	Net.init_client(IP.get_local_addresses()[1])
+	Root.change_scene(GLOBAL.SCENES.LOBBY)
+"
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tjts6")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_haf5o")
+
+[node name="Glitch" type="TextureRect" parent="Background"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_w4jor")
+script = ExtResource("3_twu48")
+metadata/_edit_lock_ = true
+
+[node name="GlitchTimer" type="Timer" parent="Background/Glitch"]
+wait_time = 0.3
+autostart = true
+
+[node name="SettingsGlitch" type="TextureRect" parent="Background"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -517.0
+offset_top = -338.0
+offset_right = 517.0
+offset_bottom = 219.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_sbnsr")
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 412.0
+offset_top = -188.0
+offset_right = -608.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 120
+
+[node name="Settings" type="TextureRect" parent="Buttons"]
+layout_mode = 2
+texture = ExtResource("7_3qp2u")
+metadata/_edit_lock_ = true
+
+[node name="Settings" type="Button" parent="Buttons/Settings"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 374.0
+offset_bottom = 75.0
+tooltip_text = "VIP"
+focus_mode = 0
+theme_override_fonts/font = ExtResource("8_n7cje")
+theme_override_font_sizes/font_size = 36
+text = "Настройки"
+flat = true
+metadata/_edit_lock_ = true
+
+[node name="Play" type="TextureRect" parent="Buttons"]
+layout_mode = 2
+texture = ExtResource("7_3qp2u")
+metadata/_edit_lock_ = true
+
+[node name="Play" type="Button" parent="Buttons/Play"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 374.0
+offset_bottom = 75.0
+tooltip_text = "VIP"
+focus_mode = 0
+theme_override_fonts/font = ExtResource("8_n7cje")
+theme_override_font_sizes/font_size = 36
+text = "Играть"
+flat = true
+metadata/_edit_lock_ = true
+
+[node name="Exit" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -521.0
+offset_top = -204.0
+offset_right = -411.0
+offset_bottom = -94.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "VIP"
+focus_mode = 0
+texture_normal = ExtResource("9_ixpxe")
+texture_pressed = ExtResource("9_ixpxe")
+texture_hover = ExtResource("10_b0bth")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Server" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_y1h8v")
+
+[node name="Host" type="Button" parent="Server"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.5
+offset_top = -304.0
+offset_right = 283.5
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Create Host"
+
+[node name="Label" type="Label" parent="Server/Host"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "IP: "
+horizontal_alignment = 1
+
+[node name="Join" type="Button" parent="Server"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.5
+offset_top = -88.0
+offset_right = 283.5
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Join"
+
+[node name="LineEdit" type="LineEdit" parent="Server/Join"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+placeholder_text = "IP"
+alignment = 1
+context_menu_enabled = false
+
+[node name="Local" type="Button" parent="Server/Join"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 87.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Join Local"
+
+[connection signal="timeout" from="Background/Glitch/GlitchTimer" to="Background/Glitch" method="_on_glitch_timer_timeout"]
+[connection signal="mouse_entered" from="Buttons/Settings/Settings" to="." method="_on_settings_hovered"]
+[connection signal="mouse_exited" from="Buttons/Settings/Settings" to="." method="_on_settings_unhovered"]
+[connection signal="pressed" from="Buttons/Settings/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Buttons/Play/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Server/Host" to="Server" method="_on_host_pressed"]
+[connection signal="pressed" from="Server/Join" to="Server" method="_on_join_pressed"]
+[connection signal="pressed" from="Server/Join/Local" to="Server" method="_on_local_pressed"]

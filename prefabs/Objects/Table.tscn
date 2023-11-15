@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxdotd6s18cbk"]
+
+[ext_resource type="PackedScene" uid="uid://bl8cxpbjswejl" path="res://prefabs/Objects/Object.tscn" id="1_iqjhb"]
+[ext_resource type="Texture2D" uid="uid://d1g7uw1baedvp" path="res://assets/sprites/objects/lobby/table.png" id="2_nuvub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fg2yd"]
+size = Vector2(23, 56)
+
+[node name="Table" instance=ExtResource("1_iqjhb")]
+collision_layer = 33
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_nuvub")
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_fg2yd")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6gmjq1fbiqte"]
+
+[ext_resource type="Texture2D" uid="uid://6sqj67llme6m" path="res://assets/sprites/weapons/plasmaRifle.png" id="1_btlqs"]
+[ext_resource type="PackedScene" uid="uid://byw6urgp0aexf" path="res://prefabs/Weapons/Weapon.tscn" id="1_r8l8j"]
+[ext_resource type="Script" path="res://scripts/prefabs/weapons/rifle.gd" id="2_0hasi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0k8d7"]
+size = Vector2(43, 34)
+
+[node name="Rifle" instance=ExtResource("1_r8l8j")]
+texture = ExtResource("1_btlqs")
+script = ExtResource("2_0hasi")
+
+[node name="BulletsSpawnPos" type="Marker2D" parent="." index="2"]
+position = Vector2(118, 0)
+
+[node name="CheckArea" type="Area2D" parent="." index="3"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckArea" index="0"]
+position = Vector2(122.5, 0)
+shape = SubResource("RectangleShape2D_0k8d7")

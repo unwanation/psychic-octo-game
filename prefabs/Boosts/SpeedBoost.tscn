@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctjlato4fyfq1"]
+
+[ext_resource type="PackedScene" uid="uid://cfapn50g1ik2j" path="res://prefabs/Boosts/Boost.tscn" id="1_rix6r"]
+[ext_resource type="Script" path="res://scripts/prefabs/boosts/speedboost.gd" id="2_sb51t"]
+[ext_resource type="Texture2D" uid="uid://r0wbhd6r0c18" path="res://assets/sprites/boosts/SpeedBoost.png" id="2_u0tnf"]
+
+[node name="SpeedBoost" instance=ExtResource("1_rix6r")]
+script = ExtResource("2_sb51t")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_u0tnf")
